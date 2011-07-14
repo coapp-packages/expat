@@ -1,0 +1,65 @@
+/* target information */
+
+#product-info  {
+	product-name: "expat";
+	version: "2.01";
+	original-source-location: "http://sourceforge.net/projects/expat/files/expat/2.0.1/expat-2.0.1.tar.gz/download";
+	original-source-website: "http://expat.sourceforge.net/";
+	license: "MIT/X Consortium license";
+	packager: "Hamish C";
+}
+
+x86 {
+    compiler: vc10-x86;
+    
+    targets: { 
+		"win32\bin\Release\libexpat.dll",
+		"win32\bin\Release\libexpat.exp",
+		"win32\bin\Release\libexpat.lib",
+		"win32\bin\Release\libexpatMT.lib",
+		"win32\bin\Release\libexpatw.dll",
+		"win32\bin\Release\libexpatw.exp",
+		"win32\bin\Release\libexpatw.lib",
+		"win32\bin\Release\libexpatwMT.lib",
+		"win32\bin\Release\xmlwf.dll",
+		"win32\bin\Release\outline.dll",
+		"win32\bin\Release\elements.dll",
+	};
+	
+    build-command:@"
+		msbuild /p:Platform=win32 /p:Configuration=Release expat.sln
+	";
+    
+    clean-command:@"
+       if exist win32\bin rmdir /s /q win32\bin > nul 2> nul
+       if exist win32\tmp rmdir /s /q win32\tmp > nul 2> nul
+       del /S /Q /A - *.sdf *.suo *.user *.exe *.pdb > nul 2>NUL
+    ";
+};
+
+x64 {
+    compiler: vc10-x64;
+
+	targets: { 
+		"win32\bin\x64\Release\libexpat.dll",
+		"win32\bin\x64\Release\libexpat.exp",
+		"win32\bin\x64\Release\libexpat.lib",
+		"win32\bin\x64\Release\libexpatMT.lib",
+		"win32\bin\x64\Release\libexpatw.dll",
+		"win32\bin\x64\Release\libexpatw.exp",
+		"win32\bin\x64\Release\libexpatw.lib",
+		"win32\bin\x64\Release\libexpatwMT.lib",
+		"win32\bin\x64\Release\xmlwf.dll",
+		"win32\bin\x64\Release\outline.dll",
+		"win32\bin\x64\Release\elements.dll",
+	};
+	
+    build-command:@"
+        msbuild /p:Platform=x64 /p:Configuration=Release expat.sln
+    ";
+    clean-command:@"
+       if exist win32\bin rmdir /s /q win32\bin > nul 2> nul
+       if exist win32\tmp rmdir /s /q win32\tmp > nul 2> nul
+       del /S /Q /A - *.sdf *.suo *.user *.exe *.pdb > nul 2>NUL
+    ";
+};
