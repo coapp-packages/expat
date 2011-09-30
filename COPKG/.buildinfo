@@ -10,7 +10,8 @@
 }
 
 x86 {
-    compiler: vc10-x86;
+    compiler: vc10;
+    platform: x86;
     
     targets: { 
 		"win32\bin\Release\libexpat.dll",
@@ -38,7 +39,8 @@ x86 {
 };
 
 x64 {
-    compiler: vc10-x64;
+    compiler: vc10;
+    platform: x64;
 
 	targets: { 
 		"win32\bin\x64\Release\libexpat.dll",
