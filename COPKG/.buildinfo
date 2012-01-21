@@ -22,7 +22,8 @@ x86 {
 		"win32\bin\Release\libexpatw.exp",
 		"win32\bin\Release\libexpatw.lib",
 		"win32\bin\Release\libexpatwMT.lib",
-		"win32\bin\Release\xmlwf.dll",
+		"win32\bin\Release\xmlwf.exe",
+		/* The following are incorrectly built sample programs and should not be shipped. */
 		"win32\bin\Release\outline.dll",
 		"win32\bin\Release\elements.dll",
 	};
@@ -51,7 +52,8 @@ x64 {
 		"win32\bin\x64\Release\libexpatw.exp",
 		"win32\bin\x64\Release\libexpatw.lib",
 		"win32\bin\x64\Release\libexpatwMT.lib",
-		"win32\bin\x64\Release\xmlwf.dll",
+		"win32\bin\x64\Release\xmlwf.exe",
+		/* The following are incorrectly built sample programs and should not be shipped. */
 		"win32\bin\x64\Release\outline.dll",
 		"win32\bin\x64\Release\elements.dll",
 	};
