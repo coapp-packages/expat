@@ -39,22 +39,22 @@
     <ConfigurationType>Application</ConfigurationType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -95,8 +95,8 @@
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>.\..\win32\bin\Release\</OutDir>
-    <IntDir>.\..\win32\tmp\Release-outline\</IntDir>
+    <OutDir>.\..\win32\bin\x86\Release\</OutDir>
+    <IntDir>.\..\win32\tmp\x86\Release-outline\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -189,10 +189,10 @@
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
       <AdditionalIncludeDirectories>..\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\..\win32\tmp\Release-outline\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\..\win32\tmp\Release-outline\outline.pch</PrecompiledHeaderOutputFile>
-      <ObjectFileName>.\..\win32\tmp\Release-outline\</ObjectFileName>
-      <ProgramDataBaseFileName>.\..\win32\tmp\Release-outline\</ProgramDataBaseFileName>
+      <AssemblerListingLocation>.\..\win32\tmp\x86\Release-outline\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\..\win32\tmp\x86\Release-outline\outline.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\..\win32\tmp\x86\Release-outline\</ObjectFileName>
+      <ProgramDataBaseFileName>.\..\win32\tmp\x86\Release-outline\</ProgramDataBaseFileName>
     </ClCompile>
     <Midl>
       <TypeLibraryName>.\..\win32\bin\Release\outline.tlb</TypeLibraryName>
@@ -208,7 +208,7 @@
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <SubSystem>Console</SubSystem>
-      <OutputFile>.\..\win32\bin\Release\outline.dll</OutputFile>
+      <OutputFile>.\..\win32\bin\x86\Release\outline.exe</OutputFile>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -243,7 +243,7 @@
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <SubSystem>Console</SubSystem>
-      <OutputFile>.\..\win32\bin\x64\Release\outline.dll</OutputFile>
+      <OutputFile>.\..\win32\bin\x64\Release\outline.exe</OutputFile>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

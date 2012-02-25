@@ -1,31 +1,104 @@
 /* target information */
+@import "version.inc";
+
 
 #product-info  {
 	product-name: "expat";
-	version: "2.01";
+	version: "2.0.1";
 	original-source-location: "http://sourceforge.net/projects/expat/files/expat/2.0.1/expat-2.0.1.tar.gz/download";
 	original-source-website: "http://expat.sourceforge.net/";
 	license: "MIT/X Consortium license";
 	packager: "Hamish C";
 }
 
+test {
+    default : false;
+    uses: release;
+    build-command: @"
+	    win32\bin\x86\Release\expat_tests.exe
+		win32\bin\x64\Release\expat_tests.exe";
+};
+
+package {
+    
+    default : false;
+    uses : sign;
+    
+    targets: { 
+        @"copkg\expat[vc10]-${package-version}-x86.msi",
+        @"copkg\expat-dev[vc10]-${package-version}-x86.msi",
+        @"copkg\expat-dev-common-${package-version}-any.msi",
+        @"copkg\expat[vc10]-${package-version}-x64.msi",
+        @"copkg\expat-dev[vc10]-${package-version}-x64.msi"
+    };
+    
+    build-command : @"
+        REM THERE IS SOME GOOFY STUFF IN HERE TO WORK AROUND A COUPLE BUGS IN AUTOPACKAGE.
+        REM FIXES COMING SOON...
+        cd COPKG
+        coapp add-feed %cd%\
+        coapp --force-scan list 
+        autopackage expat-dev-common.autopkg || goto failed
+        coapp --force-scan list 
+        autopackage expat[vc10]-x86.autopkg expat-dev[vc10]-x86.autopkg || goto failed
+        coapp --force-scan list 
+        autopackage expat[vc10]-x64.autopkg expat-dev[vc10]-x64.autopkg || goto failed
+        coapp --force-scan list 
+        coapp remove-feed %cd%\
+        ptk update-version
+    ";
+
+	clean-command: @"del COPKG\*.msi COPKG\*.wixpdb";
+	
+};
+
+
+update-version {
+    default : false;
+    
+    build-command : @"
+        REM auto-increment version.inc file...
+        
+        cd COPKG
+        setlocal EnableDelayedExpansion
+        for /F ""tokens=4,5,6,7  delims=.; "" %%v in (version.inc) do (
+            set /a build=%%y + 1
+            set VERSTRING=#define { package-version: %%v.%%w.%%x.!build!; }
+        )
+        echo !VERSTRING! > version.inc
+    ";
+}
+
+release {
+    set: BuildCfg="Release";
+    uses: x86;
+    uses: x64;
+};
+
+sign {
+    default : false;
+    uses: release;
+    build-command: @"simplesigner.exe --nologo --sign win32\bin\x64\Release\**.dll win32\bin\x64\Release\**.exe win32\bin\x86\Release\**.dll win32\bin\x86\Release\**.exe";
+};
+
+
 x86 {
+    default : false;
     compiler: vc10;
     platform: x86;
     
     targets: { 
-		"win32\bin\Release\libexpat.dll",
-		"win32\bin\Release\libexpat.exp",
-		"win32\bin\Release\libexpat.lib",
-		"win32\bin\Release\libexpatMT.lib",
-		"win32\bin\Release\libexpatw.dll",
-		"win32\bin\Release\libexpatw.exp",
-		"win32\bin\Release\libexpatw.lib",
-		"win32\bin\Release\libexpatwMT.lib",
-		"win32\bin\Release\xmlwf.exe",
-		/* The following are incorrectly built sample programs and should not be shipped. */
-		"win32\bin\Release\outline.dll",
-		"win32\bin\Release\elements.dll",
+		"win32\bin\x86\Release\libexpat.dll",
+		"win32\bin\x86\Release\libexpat.exp",
+		"win32\bin\x86\Release\libexpat.lib",
+		"win32\bin\x86\Release\libexpatMT.lib",
+		"win32\bin\x86\Release\libexpatw.dll",
+		"win32\bin\x86\Release\libexpatw.exp",
+		"win32\bin\x86\Release\libexpatw.lib",
+		"win32\bin\x86\Release\libexpatwMT.lib",
+		"win32\bin\x86\Release\xmlwf.exe",
+		"win32\bin\x86\Release\outline.exe",
+		"win32\bin\x86\Release\elements.exe",
 	};
 	
     build-command:@"
@@ -34,12 +107,14 @@ x86 {
     
     clean-command:@"
        if exist win32\bin rmdir /s /q win32\bin > nul 2> nul
+       if exist ipch rmdir /s /q ipch > nul 2> nul
        if exist win32\tmp rmdir /s /q win32\tmp > nul 2> nul
        del /S /Q /A - *.sdf *.suo *.user *.exe *.pdb > nul 2>NUL
     ";
 };
 
 x64 {
+    default : false;
     compiler: vc10;
     platform: x64;
 
@@ -53,9 +128,8 @@ x64 {
 		"win32\bin\x64\Release\libexpatw.lib",
 		"win32\bin\x64\Release\libexpatwMT.lib",
 		"win32\bin\x64\Release\xmlwf.exe",
-		/* The following are incorrectly built sample programs and should not be shipped. */
-		"win32\bin\x64\Release\outline.dll",
-		"win32\bin\x64\Release\elements.dll",
+		"win32\bin\x64\Release\outline.exe",
+		"win32\bin\x64\Release\elements.exe",
 	};
 	
     build-command:@"
@@ -63,6 +137,7 @@ x64 {
     ";
     clean-command:@"
        if exist win32\bin rmdir /s /q win32\bin > nul 2> nul
+       if exist ipch rmdir /s /q ipch > nul 2> nul
        if exist win32\tmp rmdir /s /q win32\tmp > nul 2> nul
        del /S /Q /A - *.sdf *.suo *.user *.exe *.pdb > nul 2>NUL
     ";

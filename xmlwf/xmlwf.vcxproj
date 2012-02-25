@@ -81,8 +81,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>.\..\win32\bin\Release\</OutDir>
-    <IntDir>.\..\win32\tmp\Release-xmlwf\</IntDir>
+    <OutDir>.\..\win32\bin\x86\Release\</OutDir>
+    <IntDir>.\..\win32\tmp\x86\Release-xmlwf\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -111,12 +111,12 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>..\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_CONSOLE;COMPILED_FROM_DSP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\..\win32\tmp\Release-xmlwf\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\..\win32\tmp\Release-xmlwf\xmlwf.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\..\win32\tmp\x86\Release-xmlwf\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\..\win32\tmp\x86\Release-xmlwf\xmlwf.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <ObjectFileName>.\..\win32\tmp\Release-xmlwf\</ObjectFileName>
-      <ProgramDataBaseFileName>.\..\win32\tmp\Release-xmlwf\</ProgramDataBaseFileName>
+      <ObjectFileName>.\..\win32\tmp\x86\Release-xmlwf\</ObjectFileName>
+      <ProgramDataBaseFileName>.\..\win32\tmp\x86\Release-xmlwf\</ProgramDataBaseFileName>
     </ClCompile>
     <Midl>
       <TypeLibraryName>.\..\win32\bin\Release\xmlwf.tlb</TypeLibraryName>
@@ -133,7 +133,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <OutputFile>.\..\win32\bin\Release\xmlwf.exe</OutputFile>
+      <OutputFile>.\..\win32\bin\x86\Release\xmlwf.exe</OutputFile>
       <AdditionalDependencies>setargv.obj;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

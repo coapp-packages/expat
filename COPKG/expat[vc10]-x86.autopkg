@@ -1,0 +1,8 @@
+// details for x86 version of expat package
+// build with: autopackage x86.autopkg expat.autopkg  
+@import "expat.inc";
+
+#define { 
+    flavor: "vc10"; 
+    arch : "x86";
+}

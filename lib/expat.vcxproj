@@ -95,8 +95,8 @@
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>.\..\win32\bin\Release\</OutDir>
-    <IntDir>.\..\win32\tmp\Release\</IntDir>
+    <OutDir>.\..\win32\bin\x86\Release\</OutDir>
+    <IntDir>.\..\win32\tmp\x86\Release\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -199,12 +199,12 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;_USRDLL;COMPILED_FROM_DSP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\..\win32\tmp\Release\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\..\win32\tmp\Release\expat.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\..\win32\tmp\x86\Release\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\..\win32\tmp\x86\Release\expat.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <ObjectFileName>.\..\win32\tmp\Release\</ObjectFileName>
-      <ProgramDataBaseFileName>.\..\win32\tmp\Release\</ProgramDataBaseFileName>
+      <ObjectFileName>.\..\win32\tmp\x86\Release\</ObjectFileName>
+      <ProgramDataBaseFileName>.\..\win32\tmp\x86\Release\</ProgramDataBaseFileName>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -225,8 +225,8 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
       <SubSystem>Console</SubSystem>
-      <OutputFile>..\win32\bin\Release/libexpat.dll</OutputFile>
-      <ImportLibrary>.\..\win32\bin\Release\libexpat.lib</ImportLibrary>
+      <OutputFile>..\win32\bin\x86\Release/libexpat.dll</OutputFile>
+      <ImportLibrary>.\..\win32\bin\x86\Release\libexpat.lib</ImportLibrary>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\libexpat.def</ModuleDefinitionFile>
     </Link>

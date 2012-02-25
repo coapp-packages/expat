@@ -85,8 +85,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>.\..\win32\bin\Release\</OutDir>
-    <IntDir>.\..\win32\tmp\Release_static\</IntDir>
+    <OutDir>.\..\win32\bin\x86\Release\</OutDir>
+    <IntDir>.\..\win32\tmp\x86\Release_static\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>.\..\win32\bin\x64\Release\</OutDir>
@@ -110,10 +110,10 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_LIB;COMPILED_FROM_DSP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\..\win32\tmp\Release_static\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\..\win32\tmp\Release_static\expat_static.pch</PrecompiledHeaderOutputFile>
-      <ObjectFileName>.\..\win32\tmp\Release_static\</ObjectFileName>
-      <ProgramDataBaseFileName>.\..\win32\tmp\Release_static\</ProgramDataBaseFileName>
+      <AssemblerListingLocation>.\..\win32\tmp\x86\Release_static\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\..\win32\tmp\x86\Release_static\expat_static.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\..\win32\tmp\x86\Release_static\</ObjectFileName>
+      <ProgramDataBaseFileName>.\..\win32\tmp\x86\Release_static\</ProgramDataBaseFileName>
     </ClCompile>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -125,7 +125,7 @@
     </Bscmake>
     <Lib>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>..\win32\bin\Release/libexpatMT.lib</OutputFile>
+      <OutputFile>..\win32\bin\x86\Release\libexpatMT.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

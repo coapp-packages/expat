@@ -1,0 +1,62 @@
+@import "version.inc" ;
+@import "outercurve.inc" ;
+
+package {
+    name: "expat-dev-common";
+    version: "${package-version}";
+    arch: any;
+    display-name: "Expat Dev Library-common";
+}
+
+metadata {
+    summary: "The Expat developer library (common)";
+    description: @"Expat is an XML parser library written in C. It is a stream-oriented parser in which an application registers handlers for things the parser might find in the XML document."; 
+        
+    icon: @"expat.png";
+    
+    author-version : "2.0.1";
+    bug-tracker: "https://github.com/coapp-packages/expat/issues";
+    stability : "0";
+    licenses : {
+        MIT
+    };
+}
+
+files[headers] {
+    root: "..\\lib\\";
+    include: {
+		//not sure which others should be here too...
+        "expat.h",
+		"xmltok.h",
+		"xmlrole.h",
+    };
+    
+    trim-path:all;
+    
+    // ensures that all the header files end up in a subfolder called 'include'
+    destination-path:"include";
+}
+
+files[docs] {
+    root: "..\\doc\\";
+    include: {
+        "*"
+    };
+    
+    trim-path:all;
+    
+    // ensures that all the documentation files end up in a subfolder called 'docs'
+    destination-path:"docs";
+
+}
+
+// the 'name' of the developer library isn't terribly important...
+developer-library[expat] {
+    headers: { 
+        headers
+    };
+    
+    docs: {
+        docs
+    };
+}
