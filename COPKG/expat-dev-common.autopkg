@@ -27,6 +27,7 @@ files[headers] {
     include: {
 		//not sure which others should be here too...
         "expat.h",
+		"expat_external.h",
 		"xmltok.h",
 		"xmlrole.h",
     };
