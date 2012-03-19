@@ -15,8 +15,9 @@ test {
     default : false;
     uses: release;
     build-command: @"
-	    win32\bin\x86\Release\expat_tests.exe
-		win32\bin\x64\Release\expat_tests.exe";
+	    win32\bin\x86\Release\expat_tests.exe || goto failed
+		win32\bin\x64\Release\expat_tests.exe || goto failed
+	";
 };
 
 package {
@@ -36,15 +37,12 @@ package {
         REM THERE IS SOME GOOFY STUFF IN HERE TO WORK AROUND A COUPLE BUGS IN AUTOPACKAGE.
         REM FIXES COMING SOON...
         cd COPKG
-        coapp add-feed %cd%\
-        coapp --force-scan list 
+        coapp add-feed ""%cd%""
         autopackage expat-dev-common.autopkg || goto failed
         coapp --force-scan list 
         autopackage expat[vc10]-x86.autopkg expat-dev[vc10]-x86.autopkg || goto failed
-        coapp --force-scan list 
         autopackage expat[vc10]-x64.autopkg expat-dev[vc10]-x64.autopkg || goto failed
-        coapp --force-scan list 
-        coapp remove-feed %cd%\
+        coapp remove-feed ""%cd%""
         ptk update-version
     ";
 
