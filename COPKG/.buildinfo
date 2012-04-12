@@ -12,16 +12,20 @@
 }
 
 test {
+    set: PLAT="${PLAT??x86, x64}";
     default : false;
-    uses: release;
     build-command: @"
-	    win32\bin\x86\Release\expat_tests.exe || goto failed
-		win32\bin\x64\Release\expat_tests.exe || goto failed
+        if ""${BUILT}"" neq ""true"" ptk release --nologo --COMP=""${COMP}"" --PLAT=""${PLAT}""
+
+        for %%A in (${PLAT}) do (
+            win32\bin\%%A\Release\expat_tests.exe || goto failed
+        )
 	";
 };
 
 package {
-    
+    set: COMP="${COMP??vc10}";
+    set: PLAT="${PLAT??x86, x64}";
     default : false;
     uses : sign;
     
@@ -34,15 +38,13 @@ package {
     };
     
     build-command : @"
-        REM THERE IS SOME GOOFY STUFF IN HERE TO WORK AROUND A COUPLE BUGS IN AUTOPACKAGE.
-        REM FIXES COMING SOON...
         cd COPKG
-        coapp add-feed ""%cd%""
         autopackage expat-dev-common.autopkg || goto failed
-        coapp --force-scan list 
-        autopackage expat[vc10]-x86.autopkg expat-dev[vc10]-x86.autopkg || goto failed
-        autopackage expat[vc10]-x64.autopkg expat-dev[vc10]-x64.autopkg || goto failed
-        coapp remove-feed ""%cd%""
+        for %%a in (${COMP}) do (
+            for %%b in (${PLAT}) do (
+                autopackage --comp=%%a --plat=%%b expat.autopkg expat-dev.autopkg || goto failed
+            )
+        )
         ptk update-version
     ";
 
@@ -68,71 +70,71 @@ update-version {
 }
 
 release {
-    set: BuildCfg="Release";
-    uses: x86;
-    uses: x64;
+    set: {
+		BuildCfg="Release";
+        COMP="${COMP??vc10}";
+		PLAT="${PLAT??x86, x64}";
+	};
+	build-command: @"
+        for %%A in (${COMP}) do (
+            for %%B in (${PLAT}) do (
+                ptk --nologo base --COMP=%%A --PLAT=%%B --BuildCfg=${BuildCfg} || goto failed
+            )
+        )
+	";
 };
 
 sign {
+    set: {
+        COMP="${COMP??vc10}";
+		PLAT="${PLAT??x86, x64}";
+    };
     default : false;
-    uses: release;
-    build-command: @"simplesigner.exe --nologo --sign win32\bin\x64\Release\**.dll win32\bin\x64\Release\**.exe win32\bin\x86\Release\**.dll win32\bin\x86\Release\**.exe";
+    build-command: @"
+        if ""${BUILT}"" neq ""true"" ptk release --nologo --COMP=""${COMP}"" --PLAT=""${PLAT}""
+
+        for %%A in (${PLAT}) do (
+            simplesigner.exe --nologo --sign win32\bin\%%A\Release\**.dll win32\bin\%%A\Release\**.exe
+        )
+    ";
 };
 
 
-x86 {
+base {
+    set: {
+        BuildCfg="${BuildCfg??Release}";
+        COMP="${COMP??vc10}";
+		PLAT="${PLAT??x86}";
+    };
     default : false;
-    compiler: vc10;
-    platform: x86;
+    compiler: ${COMP};
+    platform: ${PLAT};
     
     targets: { 
-		"win32\bin\x86\Release\libexpat.dll",
-		"win32\bin\x86\Release\libexpat.exp",
-		"win32\bin\x86\Release\libexpat.lib",
-		"win32\bin\x86\Release\libexpatMT.lib",
-		"win32\bin\x86\Release\libexpatw.dll",
-		"win32\bin\x86\Release\libexpatw.exp",
-		"win32\bin\x86\Release\libexpatw.lib",
-		"win32\bin\x86\Release\libexpatwMT.lib",
-		"win32\bin\x86\Release\xmlwf.exe",
-		"win32\bin\x86\Release\outline.exe",
-		"win32\bin\x86\Release\elements.exe",
+		"win32\bin\${PLAT}\Release\libexpat.dll",
+		"win32\bin\${PLAT}\Release\libexpat.exp",
+		"win32\bin\${PLAT}\Release\libexpat.lib",
+		"win32\bin\${PLAT}\Release\libexpatMT.lib",
+		"win32\bin\${PLAT}\Release\libexpatw.dll",
+		"win32\bin\${PLAT}\Release\libexpatw.exp",
+		"win32\bin\${PLAT}\Release\libexpatw.lib",
+		"win32\bin\${PLAT}\Release\libexpatwMT.lib",
+		"win32\bin\${PLAT}\Release\xmlwf.exe",
+		"win32\bin\${PLAT}\Release\outline.exe",
+		"win32\bin\${PLAT}\Release\elements.exe",
 	};
 	
     build-command:@"
-		msbuild /p:Platform=win32 /p:Configuration=Release expat.sln
+        REM this makes it so that DLLs can have their own SxS Activation Context in an embedded resource.
+		echo %_CL% | findstr ISOLATION_AWARE || set _CL=%CL% /D ISOLATION_AWARE_ENABLED
+
+        if ""${PLAT}"" == ""x86"" (
+            msbuild /p:Platform=win32 /p:Configuration=${BuildCfg} expat.sln
+        ) else (
+            msbuild /p:Platform=${PLAT} /p:Configuration=${BuildCfg} expat.sln
+        )
 	";
     
-    clean-command:@"
-       if exist win32\bin rmdir /s /q win32\bin > nul 2> nul
-       if exist ipch rmdir /s /q ipch > nul 2> nul
-       if exist win32\tmp rmdir /s /q win32\tmp > nul 2> nul
-       del /S /Q /A - *.sdf *.suo *.user *.exe *.pdb > nul 2>NUL
-    ";
-};
-
-x64 {
-    default : false;
-    compiler: vc10;
-    platform: x64;
-
-	targets: { 
-		"win32\bin\x64\Release\libexpat.dll",
-		"win32\bin\x64\Release\libexpat.exp",
-		"win32\bin\x64\Release\libexpat.lib",
-		"win32\bin\x64\Release\libexpatMT.lib",
-		"win32\bin\x64\Release\libexpatw.dll",
-		"win32\bin\x64\Release\libexpatw.exp",
-		"win32\bin\x64\Release\libexpatw.lib",
-		"win32\bin\x64\Release\libexpatwMT.lib",
-		"win32\bin\x64\Release\xmlwf.exe",
-		"win32\bin\x64\Release\outline.exe",
-		"win32\bin\x64\Release\elements.exe",
-	};
-	
-    build-command:@"
-        msbuild /p:Platform=x64 /p:Configuration=Release expat.sln
-    ";
     clean-command:@"
        if exist win32\bin rmdir /s /q win32\bin > nul 2> nul
        if exist ipch rmdir /s /q ipch > nul 2> nul

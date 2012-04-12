@@ -1,4 +1,5 @@
 @import "version.inc" ;
+@import "compat.inc";
 @import "outercurve.inc" ;
 
 package {
@@ -33,9 +34,6 @@ files[headers] {
     };
     
     trim-path:all;
-    
-    // ensures that all the header files end up in a subfolder called 'include'
-    destination-path:"include";
 }
 
 files[docs] {
@@ -44,11 +42,7 @@ files[docs] {
         "*"
     };
     
-    trim-path:all;
-    
-    // ensures that all the documentation files end up in a subfolder called 'docs'
-    destination-path:"docs";
-
+    trim-path:minimal;
 }
 
 // the 'name' of the developer library isn't terribly important...

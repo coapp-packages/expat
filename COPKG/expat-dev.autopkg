@@ -1,5 +1,11 @@
-@import "version.inc" ;
-@import "outercurve.inc" ;
+@import "version.inc";
+@import "compat.inc";
+@import "outercurve.inc";
+
+#define { 
+    flavor: "${comp??vc10}"; 
+    arch : "${plat??x86}";
+}
 
 package {
     name: "expat-dev[${flavor}]";
@@ -41,7 +47,7 @@ requires {
     package: "expat[${flavor}]-${package-version}-${Package.Architecture}-${Package.PublicKeyToken}";
 }
 
-developer-library[expat] {
+developer-library[expat[${flavor}]] {
     libraries : {
         libs
     };
