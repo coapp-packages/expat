@@ -15,7 +15,7 @@ test {
     set: PLAT="${PLAT??x86, x64}";
     default : false;
     build-command: @"
-        if ""${BUILT}"" neq ""true"" ptk release --nologo --COMP=""${COMP}"" --PLAT=""${PLAT}""
+        if ""${BUILT}"" neq ""true"" ptk release --nologo --PLAT=""${PLAT}""
 
         for %%A in (${PLAT}) do (
             win32\bin\%%A\Release\expat_tests.exe || goto failed
@@ -107,8 +107,8 @@ base {
 		PLAT="${PLAT??x86}";
     };
     default : false;
-    compiler: ${COMP};
-    platform: ${PLAT};
+    compiler: "${COMP}";
+    platform: "${PLAT}";
     
     targets: { 
 		"win32\bin\${PLAT}\Release\libexpat.dll",
