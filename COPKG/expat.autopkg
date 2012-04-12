@@ -85,7 +85,7 @@ manifest[things-that-need-them] {
     };
 }
 
-assembly[expat[${flavor}] {
+assembly[expat[${flavor}]] {
     include : {
         dlls
     };
