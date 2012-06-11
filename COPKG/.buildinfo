@@ -34,7 +34,7 @@ package {
     };
     
     targets: {
-        (COMP,PLAT) => @"copkg\expat[${1}]-${NewVersion}-${2}.msi",
+        (COMP,PLAT) => @"copkg\expat[${0}]-${NewVersion}-${1}.msi",
     };
     
     build-command : @"
