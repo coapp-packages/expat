@@ -1,6 +1,7 @@
 /* target information */
 @import "version.inc";
 
+#define {    NewVersion : "${package-version++}";}
 
 #product-info  {
 	product-name: "expat";
@@ -27,7 +28,10 @@ package {
     set: COMP="${COMP??vc10}";
     set: PLAT="${PLAT??x86, x64}";
     default : false;
-    uses : sign;
+    uses : {
+        update-version;
+        sign;
+    };
     
     targets: { 
         @"copkg\expat[vc10]-${package-version}-x86.msi",
@@ -45,7 +49,6 @@ package {
                 autopackage --comp=%%a --plat=%%b expat.autopkg expat-dev.autopkg || goto failed
             )
         )
-        ptk update-version
     ";
 
 	clean-command: @"del COPKG\*.msi COPKG\*.wixpdb";
@@ -58,14 +61,13 @@ update-version {
     
     build-command : @"
         REM auto-increment version.inc file...
-        
-        cd COPKG
+        if ""${noversion}"" == ""true"" goto :endver
+        pushd COPKG
         setlocal EnableDelayedExpansion
-        for /F ""tokens=4,5,6,7  delims=.; "" %%v in (version.inc) do (
-            set /a build=%%y + 1
-            set VERSTRING=#define { package-version: %%v.%%w.%%x.!build!; }
-        )
+        set VERSTRING=#define { package-version: ${NewVersion}; }
         echo !VERSTRING! > version.inc
+        popd
+        :endver
     ";
 }
 
