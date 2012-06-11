@@ -29,16 +29,12 @@ package {
     set: PLAT="${PLAT??x86, x64}";
     default : false;
     uses : {
-        update-version;
-        sign;
+        update-version,
+        sign,
     };
     
-    targets: { 
-        @"copkg\expat[vc10]-${package-version}-x86.msi",
-        @"copkg\expat-dev[vc10]-${package-version}-x86.msi",
-        @"copkg\expat-dev-common-${package-version}-any.msi",
-        @"copkg\expat[vc10]-${package-version}-x64.msi",
-        @"copkg\expat-dev[vc10]-${package-version}-x64.msi"
+    targets: {
+        (COMP,PLAT) => @"copkg\expat[${1}]-${NewVersion}-${2}.msi
     };
     
     build-command : @"
