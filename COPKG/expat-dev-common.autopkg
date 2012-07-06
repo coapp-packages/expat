@@ -15,7 +15,7 @@ metadata {
         
     icon: @"expat.png";
     
-    author-version : "2.0.1";
+    author-version : "2.1.0";
     bug-tracker: "https://github.com/coapp-packages/expat/issues";
     stability : "0";
     licenses : {

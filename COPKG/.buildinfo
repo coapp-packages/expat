@@ -5,8 +5,8 @@
 
 #product-info  {
 	product-name: "expat";
-	version: "2.0.1";
-	original-source-location: "http://sourceforge.net/projects/expat/files/expat/2.0.1/expat-2.0.1.tar.gz/download";
+	version: "2.1.0";
+	original-source-location: "http://sourceforge.net/projects/expat/files/expat/2.1.0/expat-2.1.0.tar.gz/download";
 	original-source-website: "http://expat.sourceforge.net/";
 	license: "MIT/X Consortium license";
 	packager: "Hamish C";
