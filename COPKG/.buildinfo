@@ -124,7 +124,7 @@ base {
 	
     build-command:@"
         REM this makes it so that DLLs can have their own SxS Activation Context in an embedded resource.
-		echo %_CL% | findstr ISOLATION_AWARE || set _CL=%CL% /D ISOLATION_AWARE_ENABLED /U NOUSER
+		echo %CL% | findstr ISOLATION_AWARE || set CL=%CL% /D ISOLATION_AWARE_ENABLED /U NOUSER
 
         if ""${PLAT}"" == ""x86"" (
             msbuild /p:Platform=win32 /p:Configuration=${BuildCfg} expat.sln
