@@ -1,113 +1,225 @@
-@import "version.inc";
-@import "compat.inc";
-@import "outercurve.inc";
+@import @"version.inc";
 
-#define { 
-    flavor: "${comp??vc10}"; 
-    arch : "${plat??x86}";
-}
-
-package {
-    name: "expat[${flavor}]";
-    version: "${package-version}";
-    arch : "${arch}";
-    
-    display-name: "Expat";
-    location: "http://coapp.org/repository/${OutputFilename}";
-
-    feed: "http://coapp.org/repository/packages.atom.xml";
-    publisher: "CoApp Project";
-}
-
-files[exes] {
-    root: @"..\win32\bin\${arch}\Release\";
-    
-    include: {
-        "xmlwf.exe",
-    };
-    
-    trim-path: all;
+configurations {
+	UTFwidth {
+		// the first choice is the default
+		// so, unless a choice is made, it will assume the first choice
+		choices: { utf8, utf16 };
+	}
+		
 };
 
 
-files[dlls] {
-    root: @"..\win32\bin\${arch}\Release\";
-  
-    include: {
-        "libexpat.dll",
-		"libexpatw.dll",
-    };
+nuget {
+	// the nuspec file metadata. Gets created/updated on build
+	nuspec {
+		id = expat;
+		version : ${package-version};
+		title: Expat XML Parser;
+		authors: {James Clark, Fred L. Drake, Jr., Karl Waclawek, Garrett Serack, Tim Rogers};
+		owners: {CoApp Project};
+		licenseUrl: "http://opensource.org/licenses/MIT";
+		projectUrl: "http://github.com/coapp-packages/expat";
+		iconUrl: "http://expat.sourceforge.net/expat.png";
+		requireLicenseAcceptance:false;
+		summary:The Expat XML Parser;
+		description: @"The Expat XML Parser.
+	Expat homepage:  http://libexpat.org/";
+		releaseNotes: "Release of expat 2.1.0 libraries.";
+		copyright: Copyright 2013;
+		tags: { expat, native, CoApp };
+
+	};
+
+	// the files that go into the content folders
+	// (inserted into the nuspec file)
+	files {
+		include: { 
+            ..\lib\expat.h, 
+            ..\lib\expat_external.h,
+            ..\lib\xmltok.h, 
+            ..\lib\xmlrole.h,
+        };
+
+		docs: {  ..\doc\**\* };
     
-    trim-path: all;
-};
+		[Win32,v110,dynamic,utf8,debug] { 
+			lib: { ..\output\v110\win32\debug\lib\libexpat.lib };
+			bin: { ..\output\v110\win32\debug\bin\libexpat.dll };
+            symbols += { ..\output\v110\win32\debug\bin\libexpat.pdb };
+		}
 
-license[MIT] {
-    license-url: "http://www.lua.org/license.html";
-    license-type: "MIT";
+		[Win32,v110,dynamic,utf16,debug] { 
+			lib: { ..\output\v110\win32\debug\lib\libexpatw.lib };
+			bin: { ..\output\v110\win32\debug\bin\libexpatw.dll };
+            symbols += { ..\output\v110\win32\debug\bin\libexpatw.pdb };
+		}
+
+		[x64,v110,dynamic,utf8,debug] {
+			lib: { ..\output\v110\x64\debug\lib\libexpat.lib };
+			bin: { ..\output\v110\x64\debug\bin\libexpat.dll };
+            symbols += { ..\output\v110\x64\debug\bin\libexpat.pdb };
+		}
+		
+		[x64,v110,dynamic,utf16,debug] {
+			lib: { ..\output\v110\x64\debug\lib\libexpatw.lib };
+			bin: { ..\output\v110\x64\debug\bin\libexpatw.dll };
+            symbols += { ..\output\v110\x64\debug\bin\libexpatw.pdb };
+		}
+		
+		[Win32,v110,static,utf8,debug] {
+			lib: { ..\output\v110\win32\debug\lib\libexpatMT.lib };
+		}
+
+		[Win32,v110,static,utf16,debug] {
+			lib: { ..\output\v110\win32\debug\lib\libexpatwMT.lib };
+		}
+
+		[x64,v110,static,utf8,debug] {
+			lib: { ..\output\v110\x64\debug\lib\libexpatMT.lib };
+		}
+
+		[x64,v110,static,utf16,debug] {
+			lib: { ..\output\v110\x64\debug\lib\libexpatwMT.lib };
+		}
+
+		[Win32,v100,dynamic,utf8,debug] { 
+			lib: { ..\output\v100\win32\debug\lib\libexpat.lib };
+			bin: { ..\output\v100\win32\debug\bin\libexpat.dll };
+            symbols += { ..\output\v100\win32\debug\bin\libexpat.pdb };
+		}
+
+		[Win32,v100,dynamic,utf16,debug] { 
+			lib: { ..\output\v100\win32\debug\lib\libexpatw.lib };
+			bin: { ..\output\v100\win32\debug\bin\libexpatw.dll };
+            symbols += { ..\output\v100\win32\debug\bin\libexpatw.pdb };
+		}
+
+		[x64,v100,dynamic,utf8,debug] {
+			lib: { ..\output\v100\x64\debug\lib\libexpat.lib };
+			bin: { ..\output\v100\x64\debug\bin\libexpat.dll };
+            symbols += { ..\output\v100\x64\debug\bin\libexpat.pdb };
+		}
+		
+		[x64,v100,dynamic,utf16,debug] {
+			lib: { ..\output\v100\x64\debug\lib\libexpatw.lib };
+			bin: { ..\output\v100\x64\debug\bin\libexpatw.dll };
+            symbols += { ..\output\v100\x64\debug\bin\libexpatw.pdb };
+		}
+		
+		[Win32,v100,static,utf8,debug] {
+			lib: { ..\output\v100\win32\debug\lib\libexpatMT.lib };
+		}
+
+		[Win32,v100,static,utf16,debug] {
+			lib: { ..\output\v100\win32\debug\lib\libexpatwMT.lib };
+		}
+
+		[x64,v100,static,utf8,debug] {
+			lib: { ..\output\v100\x64\debug\lib\libexpatMT.lib };
+		}
+
+		[x64,v100,static,utf16,debug] {
+			lib: { ..\output\v100\x64\debug\lib\libexpatwMT.lib };
+		}
+
+		[Win32,v110,dynamic,utf8,release] { 
+			lib: { ..\output\v110\win32\release\lib\libexpat.lib };
+			bin: { ..\output\v110\win32\release\bin\libexpat.dll };
+            symbols += { ..\output\v110\win32\release\bin\libexpat.pdb };
+		}
+
+		[Win32,v110,dynamic,utf16,release] { 
+			lib: { ..\output\v110\win32\release\lib\libexpatw.lib };
+			bin: { ..\output\v110\win32\release\bin\libexpatw.dll };
+            symbols += { ..\output\v110\win32\release\bin\libexpatw.pdb };
+		}
+
+		[x64,v110,dynamic,utf8,release] {
+			lib: { ..\output\v110\x64\release\lib\libexpat.lib };
+			bin: { ..\output\v110\x64\release\bin\libexpat.dll };
+            symbols += { ..\output\v110\x64\release\bin\libexpat.pdb };
+		}
+		
+		[x64,v110,dynamic,utf16,release] {
+			lib: { ..\output\v110\x64\release\lib\libexpatw.lib };
+			bin: { ..\output\v110\x64\release\bin\libexpatw.dll };
+            symbols += { ..\output\v110\x64\release\bin\libexpatw.pdb };
+		}
+		
+		[Win32,v110,static,utf8,release] {
+			lib: { ..\output\v110\win32\release\lib\libexpatMT.lib };
+		}
+
+		[Win32,v110,static,utf16,release] {
+			lib: { ..\output\v110\win32\release\lib\libexpatwMT.lib };
+		}
+
+		[x64,v110,static,utf8,release] {
+			lib: { ..\output\v110\x64\release\lib\libexpatMT.lib };
+		}
+
+		[x64,v110,static,utf16,release] {
+			lib: { ..\output\v110\x64\release\lib\libexpatwMT.lib };
+		}
+
+		[Win32,v100,dynamic,utf8,release] { 
+			lib: { ..\output\v100\win32\release\lib\libexpat.lib };
+			bin: { ..\output\v100\win32\release\bin\libexpat.dll };
+            symbols += { ..\output\v100\win32\release\bin\libexpat.pdb };
+		}
+
+		[Win32,v100,dynamic,utf16,release] { 
+			lib: { ..\output\v100\win32\release\lib\libexpatw.lib };
+			bin: { ..\output\v100\win32\release\bin\libexpatw.dll };
+            symbols += { ..\output\v100\win32\release\bin\libexpatw.pdb };
+		}
+
+		[x64,v100,dynamic,utf8,release] {
+			lib: { ..\output\v100\x64\release\lib\libexpat.lib };
+			bin: { ..\output\v100\x64\release\bin\libexpat.dll };
+            symbols += { ..\output\v100\x64\release\bin\libexpat.pdb };
+		}
+		
+		[x64,v100,dynamic,utf16,release] {
+			lib: { ..\output\v100\x64\release\lib\libexpatw.lib };
+			bin: { ..\output\v100\x64\release\bin\libexpatw.dll };
+            symbols += { ..\output\v100\x64\release\bin\libexpatw.pdb };
+		}
+		
+		[Win32,v100,static,utf8,release] {
+			lib: { ..\output\v100\win32\release\lib\libexpatMT.lib };
+		}
+
+		[Win32,v100,static,utf16,release] {
+			lib: { ..\output\v100\win32\release\lib\libexpatwMT.lib };
+		}
+
+		[x64,v100,static,utf8,release] {
+			lib: { ..\output\v100\x64\release\lib\libexpatMT.lib };
+		}
+
+		[x64,v100,static,utf16,release] {
+			lib: { ..\output\v100\x64\release\lib\libexpatwMT.lib };
+		}
+
+	};
+
+	// the VC++ .props file that gets generated and inserted into the ${d_content} folder
+	props { 
+		// we're going to generate a number of properties anyway. 
+        // so even if the packager doesn't specify the props object 
+        // we're going to make this file.
+	};
+
+	// the VC++ .targets file that gets generated and inserted into the ${d_content} folder
+	targets {
+		// every configuration needs to reference the include directories.
+		Includes += ${pkg_root}${d_include};
+		Defines += HAS_EXPAT;
+		[static]
+			Defines += XML_STATIC;
+			
+	};
 }
 
-files[files-to-sign] {
-    include: { 
-        exes,
-        dlls
-    };    
-}
-
-metadata {
-    summary: "The Expat XML Parser";
-    description:  @"Expat is an XML parser library written in C. It is a stream-oriented parser in which an application registers handlers for things the parser might find in the XML document "; 
-
-    icon: @"expat.png";
-    
-    author-version : "2.1.0";
-    bug-tracker: "https://github.com/coapp-packages/lua/issues";
-    stability : "0";
-    licenses : {
-        MIT
-    };
-}
-
-application {
-    include : {
-        exes,
-    };
-}
-
-manifest[things-that-need-them] {
-    // all of our EXEs need to get the manifest entries for the assemblies we're creating in this package
-    
-    assembly : {
-        "expat[${flavor}]"
-    };
-    
-    include : { 
-        exes
-    };
-}
-
-assembly[expat[${flavor}]] {
-    include : {
-        dlls
-    };
-}
-
-package-composition {
-    symlinks : { 
-        exes => @"${bin}\${each.Name}" = @"${packagedir}\${each.Name}";
-    };
-}
-
-signing {
-    attributes : {
-        company="Outercurve Foundation",
-        description="The Expat XML Parser",
-        product-name="lua",
-        product-version="${package-version}",
-        file-version="${package-version}",
-    };
-    
-    replace-signature: true; 
-    include: { 
-        files-to-sign
-    };    
-}

@@ -84,26 +84,22 @@
     <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>.\..\win32\bin\x86\Release\</OutDir>
-    <IntDir>.\..\win32\tmp\x86\Release-w\</IntDir>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <OutDir>.\..\win32\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>.\..\win32\tmp\$(Platform)\$(Configuration)-w\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>.\..\win32\bin\x64\Release\</OutDir>
-    <IntDir>.\..\win32\tmp\x64\Release-w\</IntDir>
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>.\..\win32\bin\Debug\</OutDir>
-    <IntDir>.\..\win32\tmp\Debug-w\</IntDir>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <OutDir>.\..\win32\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>.\..\win32\tmp\$(Platform)\$(Configuration)-w\</IntDir>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>.\..\win32\bin\x64\Debug\</OutDir>
-    <IntDir>.\..\win32\tmp\x64\Debug-w\</IntDir>
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)libexpatw.pdb</ProgramDatabaseFile>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -114,17 +110,17 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;COMPILED_FROM_DSP;WIN32;_WINDOWS;_USRDLL;XML_UNICODE_WCHAR_T;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\..\win32\tmp\x86\Release-w\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\..\win32\tmp\x86\Release-w\expatw.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>$(IntDir)expatw.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <ObjectFileName>.\..\win32\tmp\x86\Release-w\</ObjectFileName>
-      <ProgramDataBaseFileName>.\..\win32\tmp\x86\Release-w\</ProgramDataBaseFileName>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <TypeLibraryName>.\..\win32\bin\Release\expatw.tlb</TypeLibraryName>
+      <TypeLibraryName>$(OutDir)expatw.tlb</TypeLibraryName>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
     </Midl>
@@ -134,14 +130,14 @@
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\..\win32\bin\Release\expatw.bsc</OutputFile>
+      <OutputFile>$(OutDir)expatw.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
       <SubSystem>Console</SubSystem>
-      <OutputFile>..\win32\bin\x86\Release/libexpatw.dll</OutputFile>
-      <ImportLibrary>.\..\win32\bin\x86\Release\libexpatw.lib</ImportLibrary>
+      <OutputFile>$(OutDir)libexpatw.dll</OutputFile>
+      <ImportLibrary>$(OutDir)libexpatw.lib</ImportLibrary>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\libexpatw.def</ModuleDefinitionFile>
     </Link>
@@ -156,17 +152,17 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;COMPILED_FROM_DSP;WIN32;_WINDOWS;_USRDLL;XML_UNICODE_WCHAR_T;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\..\win32\tmp\x64\Release-w\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\..\win32\tmp\Release-w\expatw.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>$(IntDir)expatw.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <ObjectFileName>.\..\win32\tmp\x64\Release-w\</ObjectFileName>
-      <ProgramDataBaseFileName>.\..\win32\tmp\x64\Release-w\</ProgramDataBaseFileName>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <TypeLibraryName>.\..\win32\bin\Release\expatw.tlb</TypeLibraryName>
+      <TypeLibraryName>$(OutDir)expatw.tlb</TypeLibraryName>
       <MkTypLibCompatible>true</MkTypLibCompatible>
     </Midl>
     <ResourceCompile>
@@ -175,14 +171,14 @@
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\..\win32\bin\Release\expatw.bsc</OutputFile>
+      <OutputFile>$(OutDir)expatw.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
       <SubSystem>Console</SubSystem>
-      <OutputFile>..\win32\bin\x64\Release/libexpatw.dll</OutputFile>
-      <ImportLibrary>.\..\win32\bin\x64\Release\libexpatw.lib</ImportLibrary>
+      <OutputFile>$(OutDir)libexpatw.dll</OutputFile>
+      <ImportLibrary>$(OutDir)libexpatw.lib</ImportLibrary>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\libexpatw.def</ModuleDefinitionFile>
     </Link>
@@ -197,17 +193,17 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <PreprocessorDefinitions>_DEBUG;COMPILED_FROM_DSP;WIN32;_WINDOWS;_USRDLL;XML_UNICODE_WCHAR_T;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\..\win32\tmp\Debug-w\</AssemblerListingLocation>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BrowseInformation>true</BrowseInformation>
-      <PrecompiledHeaderOutputFile>.\..\win32\tmp\Debug-w\expatw.pch</PrecompiledHeaderOutputFile>
-      <ObjectFileName>.\..\win32\tmp\Debug-w\</ObjectFileName>
-      <ProgramDataBaseFileName>.\..\win32\tmp\Debug-w\</ProgramDataBaseFileName>
+      <PrecompiledHeaderOutputFile>$(IntDir)expatw.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <TypeLibraryName>.\..\win32\bin\Debug\expatw.tlb</TypeLibraryName>
+      <TypeLibraryName>$(OutDir)expatw.tlb</TypeLibraryName>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
     </Midl>
@@ -217,15 +213,15 @@
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\..\win32\bin\Debug\expatw.bsc</OutputFile>
+      <OutputFile>$(OutDir)expatw.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <OutputFile>..\win32\bin\Debug/libexpatw.dll</OutputFile>
-      <ImportLibrary>.\..\win32\bin\Debug\libexpatw.lib</ImportLibrary>
+      <OutputFile>$(OutDir)libexpatw.dll</OutputFile>
+      <ImportLibrary>$(OutDir)libexpatw.lib</ImportLibrary>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\libexpatw.def</ModuleDefinitionFile>
     </Link>
@@ -240,17 +236,17 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <PreprocessorDefinitions>_DEBUG;COMPILED_FROM_DSP;WIN32;_WINDOWS;_USRDLL;XML_UNICODE_WCHAR_T;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\..\win32\tmp\x64\Debug-w\</AssemblerListingLocation>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BrowseInformation>true</BrowseInformation>
-      <PrecompiledHeaderOutputFile>.\..\win32\tmp\Debug-w\expatw.pch</PrecompiledHeaderOutputFile>
-      <ObjectFileName>.\..\win32\tmp\x64\Debug-w\</ObjectFileName>
-      <ProgramDataBaseFileName>.\..\win32\tmp\x64\Debug-w\</ProgramDataBaseFileName>
+      <PrecompiledHeaderOutputFile>$(IntDir)expatw.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <TypeLibraryName>.\..\win32\bin\Debug\expatw.tlb</TypeLibraryName>
+      <TypeLibraryName>$(OutDir)expatw.tlb</TypeLibraryName>
       <MkTypLibCompatible>true</MkTypLibCompatible>
     </Midl>
     <ResourceCompile>
@@ -259,15 +255,15 @@
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\..\win32\bin\Debug\expatw.bsc</OutputFile>
+      <OutputFile>$(OutDir)expatw.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <OutputFile>..\win32\bin\x64\Debug/libexpatw.dll</OutputFile>
-      <ImportLibrary>.\..\win32\bin\x64\Debug\libexpatw.lib</ImportLibrary>
+      <OutputFile>$(OutDir)libexpatw.dll</OutputFile>
+      <ImportLibrary>$(OutDir)libexpatw.lib</ImportLibrary>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\libexpatw.def</ModuleDefinitionFile>
     </Link>
