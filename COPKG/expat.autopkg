@@ -44,163 +44,163 @@ nuget {
 		docs: {  ..\doc\**\* };
     
 		[Win32,v110,dynamic,utf8,debug] { 
-			lib: { ..\output\v110\win32\debug\lib\libexpat.lib };
-			bin: { ..\output\v110\win32\debug\bin\libexpat.dll };
-            symbols += { ..\output\v110\win32\debug\bin\libexpat.pdb };
+			lib: { .\expat\output\v110\win32\debug\DynamicLibrary\cdecl\libexpat.lib };
+			bin: { .\expat\output\v110\win32\debug\DynamicLibrary\cdecl\libexpat.dll };
+            symbols += { .\expat\output\v110\win32\debug\DynamicLibrary\cdecl\libexpat.pdb };
 		}
 
 		[Win32,v110,dynamic,utf16,debug] { 
-			lib: { ..\output\v110\win32\debug\lib\libexpatw.lib };
-			bin: { ..\output\v110\win32\debug\bin\libexpatw.dll };
-            symbols += { ..\output\v110\win32\debug\bin\libexpatw.pdb };
+			lib: { .\expat\output\v110\win32\debug\DynamicLibrary\cdecl\libexpatw.lib };
+			bin: { .\expat\output\v110\win32\debug\DynamicLibrary\cdecl\libexpatw.dll };
+            symbols += { .\expat\output\v110\win32\debug\DynamicLibrary\cdecl\libexpatw.pdb };
 		}
 
 		[x64,v110,dynamic,utf8,debug] {
-			lib: { ..\output\v110\x64\debug\lib\libexpat.lib };
-			bin: { ..\output\v110\x64\debug\bin\libexpat.dll };
-            symbols += { ..\output\v110\x64\debug\bin\libexpat.pdb };
+			lib: { .\expat\output\v110\x64\debug\DynamicLibrary\cdecl\libexpat.lib };
+			bin: { .\expat\output\v110\x64\debug\DynamicLibrary\cdecl\libexpat.dll };
+            symbols += { .\expat\output\v110\x64\debug\DynamicLibrary\cdecl\libexpat.pdb };
 		}
 		
 		[x64,v110,dynamic,utf16,debug] {
-			lib: { ..\output\v110\x64\debug\lib\libexpatw.lib };
-			bin: { ..\output\v110\x64\debug\bin\libexpatw.dll };
-            symbols += { ..\output\v110\x64\debug\bin\libexpatw.pdb };
+			lib: { .\expat\output\v110\x64\debug\DynamicLibrary\cdecl\libexpatw.lib };
+			bin: { .\expat\output\v110\x64\debug\DynamicLibrary\cdecl\libexpatw.dll };
+            symbols += { .\expat\output\v110\x64\debug\DynamicLibrary\cdecl\libexpatw.pdb };
 		}
 		
 		[Win32,v110,static,utf8,debug] {
-			lib: { ..\output\v110\win32\debug\lib\libexpatMT.lib };
+			lib: { .\expat\output\v110\win32\debug\StaticLibrary\cdecl\libexpat-static.lib };
 		}
 
 		[Win32,v110,static,utf16,debug] {
-			lib: { ..\output\v110\win32\debug\lib\libexpatwMT.lib };
+			lib: { .\expat\output\v110\win32\debug\StaticLibrary\cdecl\libexpatw-static.lib };
 		}
 
 		[x64,v110,static,utf8,debug] {
-			lib: { ..\output\v110\x64\debug\lib\libexpatMT.lib };
+			lib: { .\expat\output\v110\x64\debug\StaticLibrary\cdecl\libexpat-static.lib };
 		}
 
 		[x64,v110,static,utf16,debug] {
-			lib: { ..\output\v110\x64\debug\lib\libexpatwMT.lib };
+			lib: { .\expat\output\v110\x64\debug\StaticLibrary\cdecl\libexpatw-static.lib };
 		}
 
 		[Win32,v100,dynamic,utf8,debug] { 
-			lib: { ..\output\v100\win32\debug\lib\libexpat.lib };
-			bin: { ..\output\v100\win32\debug\bin\libexpat.dll };
-            symbols += { ..\output\v100\win32\debug\bin\libexpat.pdb };
+			lib: { .\expat\output\v100\win32\debug\DynamicLibrary\cdecl\libexpat.lib };
+			bin: { .\expat\output\v100\win32\debug\DynamicLibrary\cdecl\libexpat.dll };
+            symbols += { .\expat\output\v100\win32\debug\DynamicLibrary\cdecl\libexpat.pdb };
 		}
 
 		[Win32,v100,dynamic,utf16,debug] { 
-			lib: { ..\output\v100\win32\debug\lib\libexpatw.lib };
-			bin: { ..\output\v100\win32\debug\bin\libexpatw.dll };
-            symbols += { ..\output\v100\win32\debug\bin\libexpatw.pdb };
+			lib: { .\expat\output\v100\win32\debug\DynamicLibrary\cdecl\libexpatw.lib };
+			bin: { .\expat\output\v100\win32\debug\DynamicLibrary\cdecl\libexpatw.dll };
+            symbols += { .\expat\output\v100\win32\debug\DynamicLibrary\cdecl\libexpatw.pdb };
 		}
 
 		[x64,v100,dynamic,utf8,debug] {
-			lib: { ..\output\v100\x64\debug\lib\libexpat.lib };
-			bin: { ..\output\v100\x64\debug\bin\libexpat.dll };
-            symbols += { ..\output\v100\x64\debug\bin\libexpat.pdb };
+			lib: { .\expat\output\v100\x64\debug\DynamicLibrary\cdecl\libexpat.lib };
+			bin: { .\expat\output\v100\x64\debug\DynamicLibrary\cdecl\libexpat.dll };
+            symbols += { .\expat\output\v100\x64\debug\DynamicLibrary\cdecl\libexpat.pdb };
 		}
 		
 		[x64,v100,dynamic,utf16,debug] {
-			lib: { ..\output\v100\x64\debug\lib\libexpatw.lib };
-			bin: { ..\output\v100\x64\debug\bin\libexpatw.dll };
-            symbols += { ..\output\v100\x64\debug\bin\libexpatw.pdb };
+			lib: { .\expat\output\v100\x64\debug\DynamicLibrary\cdecl\libexpatw.lib };
+			bin: { .\expat\output\v100\x64\debug\DynamicLibrary\cdecl\libexpatw.dll };
+            symbols += { .\expat\output\v100\x64\debug\DynamicLibrary\cdecl\libexpatw.pdb };
 		}
 		
 		[Win32,v100,static,utf8,debug] {
-			lib: { ..\output\v100\win32\debug\lib\libexpatMT.lib };
+			lib: { .\expat\output\v100\win32\debug\StaticLibrary\cdecl\libexpat-static.lib };
 		}
 
 		[Win32,v100,static,utf16,debug] {
-			lib: { ..\output\v100\win32\debug\lib\libexpatwMT.lib };
+			lib: { .\expat\output\v100\win32\debug\StaticLibrary\cdecl\libexpatw-static.lib };
 		}
 
 		[x64,v100,static,utf8,debug] {
-			lib: { ..\output\v100\x64\debug\lib\libexpatMT.lib };
+			lib: { .\expat\output\v100\x64\debug\StaticLibrary\cdecl\libexpat-static.lib };
 		}
 
 		[x64,v100,static,utf16,debug] {
-			lib: { ..\output\v100\x64\debug\lib\libexpatwMT.lib };
+			lib: { .\expat\output\v100\x64\debug\StaticLibrary\cdecl\libexpatw-static.lib };
 		}
 
 		[Win32,v110,dynamic,utf8,release] { 
-			lib: { ..\output\v110\win32\release\lib\libexpat.lib };
-			bin: { ..\output\v110\win32\release\bin\libexpat.dll };
-            symbols += { ..\output\v110\win32\release\bin\libexpat.pdb };
+			lib: { .\expat\output\v110\win32\release\DynamicLibrary\cdecl\libexpat.lib };
+			bin: { .\expat\output\v110\win32\release\DynamicLibrary\cdecl\libexpat.dll };
+            symbols += { .\expat\output\v110\win32\release\DynamicLibrary\cdecl\libexpat.pdb };
 		}
 
 		[Win32,v110,dynamic,utf16,release] { 
-			lib: { ..\output\v110\win32\release\lib\libexpatw.lib };
-			bin: { ..\output\v110\win32\release\bin\libexpatw.dll };
-            symbols += { ..\output\v110\win32\release\bin\libexpatw.pdb };
+			lib: { .\expat\output\v110\win32\release\DynamicLibrary\cdecl\libexpatw.lib };
+			bin: { .\expat\output\v110\win32\release\DynamicLibrary\cdecl\libexpatw.dll };
+            symbols += { .\expat\output\v110\win32\release\DynamicLibrary\cdecl\libexpatw.pdb };
 		}
 
 		[x64,v110,dynamic,utf8,release] {
-			lib: { ..\output\v110\x64\release\lib\libexpat.lib };
-			bin: { ..\output\v110\x64\release\bin\libexpat.dll };
-            symbols += { ..\output\v110\x64\release\bin\libexpat.pdb };
+			lib: { .\expat\output\v110\x64\release\DynamicLibrary\cdecl\libexpat.lib };
+			bin: { .\expat\output\v110\x64\release\DynamicLibrary\cdecl\libexpat.dll };
+            symbols += { .\expat\output\v110\x64\release\DynamicLibrary\cdecl\libexpat.pdb };
 		}
 		
 		[x64,v110,dynamic,utf16,release] {
-			lib: { ..\output\v110\x64\release\lib\libexpatw.lib };
-			bin: { ..\output\v110\x64\release\bin\libexpatw.dll };
-            symbols += { ..\output\v110\x64\release\bin\libexpatw.pdb };
+			lib: { .\expat\output\v110\x64\release\DynamicLibrary\cdecl\libexpatw.lib };
+			bin: { .\expat\output\v110\x64\release\DynamicLibrary\cdecl\libexpatw.dll };
+            symbols += { .\expat\output\v110\x64\release\DynamicLibrary\cdecl\libexpatw.pdb };
 		}
 		
 		[Win32,v110,static,utf8,release] {
-			lib: { ..\output\v110\win32\release\lib\libexpatMT.lib };
+			lib: { .\expat\output\v110\win32\release\StaticLibrary\cdecl\libexpat-static.lib };
 		}
 
 		[Win32,v110,static,utf16,release] {
-			lib: { ..\output\v110\win32\release\lib\libexpatwMT.lib };
+			lib: { .\expat\output\v110\win32\release\StaticLibrary\cdecl\libexpatw-static.lib };
 		}
 
 		[x64,v110,static,utf8,release] {
-			lib: { ..\output\v110\x64\release\lib\libexpatMT.lib };
+			lib: { .\expat\output\v110\x64\release\StaticLibrary\cdecl\libexpat-static.lib };
 		}
 
 		[x64,v110,static,utf16,release] {
-			lib: { ..\output\v110\x64\release\lib\libexpatwMT.lib };
+			lib: { .\expat\output\v110\x64\release\StaticLibrary\cdecl\libexpatw-static.lib };
 		}
 
 		[Win32,v100,dynamic,utf8,release] { 
-			lib: { ..\output\v100\win32\release\lib\libexpat.lib };
-			bin: { ..\output\v100\win32\release\bin\libexpat.dll };
-            symbols += { ..\output\v100\win32\release\bin\libexpat.pdb };
+			lib: { .\expat\output\v100\win32\release\DynamicLibrary\cdecl\libexpat.lib };
+			bin: { .\expat\output\v100\win32\release\DynamicLibrary\cdecl\libexpat.dll };
+            symbols += { .\expat\output\v100\win32\release\DynamicLibrary\cdecl\libexpat.pdb };
 		}
 
 		[Win32,v100,dynamic,utf16,release] { 
-			lib: { ..\output\v100\win32\release\lib\libexpatw.lib };
-			bin: { ..\output\v100\win32\release\bin\libexpatw.dll };
-            symbols += { ..\output\v100\win32\release\bin\libexpatw.pdb };
+			lib: { .\expat\output\v100\win32\release\DynamicLibrary\cdecl\libexpatw.lib };
+			bin: { .\expat\output\v100\win32\release\DynamicLibrary\cdecl\libexpatw.dll };
+            symbols += { .\expat\output\v100\win32\release\DynamicLibrary\cdecl\libexpatw.pdb };
 		}
 
 		[x64,v100,dynamic,utf8,release] {
-			lib: { ..\output\v100\x64\release\lib\libexpat.lib };
-			bin: { ..\output\v100\x64\release\bin\libexpat.dll };
-            symbols += { ..\output\v100\x64\release\bin\libexpat.pdb };
+			lib: { .\expat\output\v100\x64\release\DynamicLibrary\cdecl\libexpat.lib };
+			bin: { .\expat\output\v100\x64\release\DynamicLibrary\cdecl\libexpat.dll };
+            symbols += { .\expat\output\v100\x64\release\DynamicLibrary\cdecl\libexpat.pdb };
 		}
 		
 		[x64,v100,dynamic,utf16,release] {
-			lib: { ..\output\v100\x64\release\lib\libexpatw.lib };
-			bin: { ..\output\v100\x64\release\bin\libexpatw.dll };
-            symbols += { ..\output\v100\x64\release\bin\libexpatw.pdb };
+			lib: { .\expat\output\v100\x64\release\DynamicLibrary\cdecl\libexpatw.lib };
+			bin: { .\expat\output\v100\x64\release\DynamicLibrary\cdecl\libexpatw.dll };
+            symbols += { .\expat\output\v100\x64\release\DynamicLibrary\cdecl\libexpatw.pdb };
 		}
 		
 		[Win32,v100,static,utf8,release] {
-			lib: { ..\output\v100\win32\release\lib\libexpatMT.lib };
+			lib: { .\expat\output\v100\win32\release\StaticLibrary\cdecl\libexpat-static.lib };
 		}
 
 		[Win32,v100,static,utf16,release] {
-			lib: { ..\output\v100\win32\release\lib\libexpatwMT.lib };
+			lib: { .\expat\output\v100\win32\release\StaticLibrary\cdecl\libexpatw-static.lib };
 		}
 
 		[x64,v100,static,utf8,release] {
-			lib: { ..\output\v100\x64\release\lib\libexpatMT.lib };
+			lib: { .\expat\output\v100\x64\release\StaticLibrary\cdecl\libexpat-static.lib };
 		}
 
 		[x64,v100,static,utf16,release] {
-			lib: { ..\output\v100\x64\release\lib\libexpatwMT.lib };
+			lib: { .\expat\output\v100\x64\release\StaticLibrary\cdecl\libexpatw-static.lib };
 		}
 
 	};
@@ -215,11 +215,11 @@ nuget {
 	// the VC++ .targets file that gets generated and inserted into the ${d_content} folder
 	targets {
 		// every configuration needs to reference the include directories.
-		Includes += ${pkg_root}${d_include};
 		Defines += HAS_EXPAT;
 		[static]
 			Defines += XML_STATIC;
-			
+        [utf16]
+			Defines += XML_UNICODE_WCHAR_T;
 	};
 }
 
