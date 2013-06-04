@@ -1,142 +1,31 @@
-/* target information */
-@import "version.inc";
+@import default_tools;
 
-#define {    NewVersion : "${package-version++}";}
-
-#product-info  {
-	product-name: "expat";
-	version: "2.1.0";
-	original-source-location: "http://sourceforge.net/projects/expat/files/expat/2.1.0/expat-2.1.0.tar.gz/download";
-	original-source-website: "http://expat.sourceforge.net/";
-	license: "MIT/X Consortium license";
-	packager: "Hamish C";
-}
-
-test {
-    set: PLAT="${PLAT??x86, x64}";
-    default : false;
-    build-command: @"
-        if ""${BUILT}"" neq ""true"" ptk release --nologo --PLAT=""${PLAT}""
-
-        for %%A in (${PLAT}) do (
-            win32\bin\%%A\Release\expat_tests.exe || goto failed
-        )
-	";
-};
-
-package {
-    set: COMP="${COMP??vc10}";
-    set: PLAT="${PLAT??x86, x64}";
-    default : false;
-    uses : {
-        update-version,
-        sign,
-    };
-    
-    targets: {
-        (COMP,PLAT) => @"copkg\expat[${0}]-${NewVersion}-${1}.msi",
-    };
-    
-    build-command : @"
-        cd COPKG
-        autopackage expat-dev-common.autopkg || goto failed
-        for %%a in (${COMP}) do (
-            for %%b in (${PLAT}) do (
-                autopackage --comp=%%a --plat=%%b expat.autopkg expat-dev.autopkg || goto failed
-            )
-        )
-    ";
-
-	clean-command: @"del COPKG\*.msi COPKG\*.wixpdb";
-	
-};
+default {
+        // 'true-false' declares wide character usage.
+	("v110, v100", "Win32, x64", "Debug,Release", "Dynamic, Static, ltcg", "cdecl","true,false") => {
+		.PushEnvironment {};
+		.LoadSystemEnvironment {};
+        .SetEnvironmentFromTarget.Target = "VC_${0}_${1}";
+		.Message.Text = @"
 
 
-update-version {
-    default : false;
-    
-    build-command : @"
-        REM auto-increment version.inc file...
-        if ""${noversion}"" == ""true"" goto :endver
-        pushd COPKG
-        setlocal EnableDelayedExpansion
-        set VERSTRING=#define { package-version: ${NewVersion}; }
-        echo !VERSTRING! > version.inc
-        popd
-        :endver
-    ";
-}
-
-release {
-    set: {
-		BuildCfg="Release";
-        COMP="${COMP??vc10}";
-		PLAT="${PLAT??x86, x64}";
-	};
-	build-command: @"
-        for %%A in (${COMP}) do (
-            for %%B in (${PLAT}) do (
-                ptk --nologo base --COMP=%%A --PLAT=%%B --BuildCfg=${BuildCfg} || goto failed
-            )
-        )
-	";
-};
-
-sign {
-    set: {
-        COMP="${COMP??vc10}";
-		PLAT="${PLAT??x86, x64}";
-    };
-    default : false;
-    build-command: @"
-        if ""${BUILT}"" neq ""true"" ptk release --nologo --COMP=""${COMP}"" --PLAT=""${PLAT}""
-
-        for %%A in (${PLAT}) do (
-            simplesigner.exe --nologo --sign win32\bin\%%A\Release\**.dll win32\bin\%%A\Release\**.exe
-        )
-    ";
-};
-
-
-base {
-    set: {
-        BuildCfg="${BuildCfg??Release}";
-        COMP="${COMP??vc10}";
-		PLAT="${PLAT??x86}";
-    };
-    default : false;
-    compiler: "${COMP}";
-    platform: "${PLAT}";
-    
-    targets: { 
-		"win32\bin\${PLAT}\Release\libexpat.dll",
-		"win32\bin\${PLAT}\Release\libexpat.exp",
-		"win32\bin\${PLAT}\Release\libexpat.lib",
-		"win32\bin\${PLAT}\Release\libexpatMT.lib",
-		"win32\bin\${PLAT}\Release\libexpatw.dll",
-		"win32\bin\${PLAT}\Release\libexpatw.exp",
-		"win32\bin\${PLAT}\Release\libexpatw.lib",
-		"win32\bin\${PLAT}\Release\libexpatwMT.lib",
-		"win32\bin\${PLAT}\Release\xmlwf.exe",
-		"win32\bin\${PLAT}\Release\outline.exe",
-		"win32\bin\${PLAT}\Release\elements.exe",
+        Env:        ${0}-${1}  :  ${2}  ${3}  ${4}  wide=${5}
+        EnvExists:  $(IsEnvironmentValid)";
+        
+        .Exec {
+            Condition="$(IsEnvironmentValid)";
+            Command = @"msbuild $(MSBuildThisFileDirectory)expat\expat.vcxproj /p:PlatformToolset=${0};Platform=${1};Configuration=${2};UsesConfigurationType=${3};CallingConvention=${4};Wide=${5}";
+        };
+        
+        .PopEnvironment{};
 	};
 	
-    build-command:@"
-        REM this makes it so that DLLs can have their own SxS Activation Context in an embedded resource.
-		echo %CL% | findstr ISOLATION_AWARE || set CL=%CL% /D ISOLATION_AWARE_ENABLED /U NOUSER
+};
 
-        if ""${PLAT}"" == ""x86"" (
-            msbuild /p:Platform=win32 /p:Configuration=${BuildCfg} expat.sln
-        ) else (
-            msbuild /p:Platform=${PLAT} /p:Configuration=${BuildCfg} expat.sln
-        )
-	";
-    
-    clean-command:@"
-       if exist win32\bin rmdir /s /q win32\bin > nul 2> nul
-       if exist ipch rmdir /s /q ipch > nul 2> nul
-       if exist win32\tmp rmdir /s /q win32\tmp > nul 2> nul
-       del /S /Q /A - *.sdf *.suo *.user *.exe *.pdb > nul 2>NUL
-    ";
+clean {
+    .RemoveDir.Directories = @"$(MSBuildThisFileDirectory)expat\intermediate";
+};
+
+nuke {
+    .RemoveDir.Directories = @"$(MSBuildThisFileDirectory)expat\output";
 };
