@@ -43,29 +43,29 @@ nuget {
 
 		docs: {  ..\doc\**\* };
     
-        ("v100,v110", "Win32,x64", "release,debug", "Dynamic", "cdecl", "utf8") => {
-			[${0},${1},${2},${3},${4},${5}] {
-				lib:     { .\expat\output\${0}\${1}\${2}\${3}\${4}\lib\libexpat.lib };
-				bin:     { .\expat\output\${0}\${1}\${2}\${3}\${4}\lib\libexpat.dll };
-				symbols: { .\expat\output\${0}\${1}\${2}\${3}\${4}\lib\libexpat.pdb };
+        ("v100,v110", "Win32,x64", "release,debug", "Dynamic", "utf8") => {
+			[${0},${1},${2},${3},${4}] {
+				lib:     { .\expat\output\${0}\${1}\${2}\${3}\cdecl\libexpat.lib };
+				bin:     { .\expat\output\${0}\${1}\${2}\${3}\cdecl\libexpat.dll };
+				symbols: { .\expat\output\${0}\${1}\${2}\${3}\cdecl\libexpat.pdb };
 			};
 		};
-		("v100,v110", "Win32,x64", "release,debug", "Static,ltcg", "cdecl", "utf8") => {
-			[${0},${1},${2},${3},${4},${5}] {
-				lib:     { .\expat\output\${0}\${1}\${2}\${3}\${4}\lib\libexpat.lib };
+		("v100,v110", "Win32,x64", "release,debug", "Static,ltcg", "utf8") => {
+			[${0},${1},${2},${3},${4}] {
+				lib:     { .\expat\output\${0}\${1}\${2}\${3}\cdecl\libexpat.lib };
 			};
 		};
 
-        ("v100,v110", "Win32,x64", "release,debug", "Dynamic", "cdecl", "utf16") => {
-			[${0},${1},${2},${3},${4},${5}] {
-				lib:     { .\expat\output\${0}\${1}\${2}\${3}\${4}\lib\libexpatw.lib };
-				bin:     { .\expat\output\${0}\${1}\${2}\${3}\${4}\lib\libexpatw.dll };
-				symbols: { .\expat\output\${0}\${1}\${2}\${3}\${4}\lib\libexpatw.pdb };
+        ("v100,v110", "Win32,x64", "release,debug", "Dynamic", "utf16") => {
+			[${0},${1},${2},${3},${4}] {
+				lib:     { .\expat\output\${0}\${1}\${2}\${3}\cdecl\libexpatw.lib };
+				bin:     { .\expat\output\${0}\${1}\${2}\${3}\cdecl\libexpatw.dll };
+				symbols: { .\expat\output\${0}\${1}\${2}\${3}\cdecl\libexpatw.pdb };
 			};
 		};
-		("v100,v110", "Win32,x64", "release,debug", "Static,ltcg", "cdecl", "utf16") => {
-			[${0},${1},${2},${3},${4},${5}] {
-				lib:     { .\expat\output\${0}\${1}\${2}\${3}\${4}\lib\libexpatw.lib };
+		("v100,v110", "Win32,x64", "release,debug", "Static,ltcg",  "utf16") => {
+			[${0},${1},${2},${3},${4}] {
+				lib:     { .\expat\output\${0}\${1}\${2}\${3}\cdecl\libexpatw.lib };
 			};
 		};
 	};
