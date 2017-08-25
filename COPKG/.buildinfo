@@ -1,24 +1,24 @@
 @import default_tools;
+#define {
+    ProjectName = "InsertProjectNameHere";
+    ProjectFiles : {"..\expat\expat.sln"}; 
+};
 
 default {
         // 'true-false' declares wide character usage.
-	("v110, v100", "Win32, x64", "Debug,Release", "Dynamic, Static, ltcg", "cdecl","true,false") => {
-		.PushEnvironment {};
-		.LoadSystemEnvironment {};
-        .SetEnvironmentFromTarget.Target = "VC_${0}_${1}";
-		.Message.Text = @"
-
-
-        Env:        ${0}-${1}  :  ${2}  ${3}  ${4}  wide=${5}
-        EnvExists:  $(IsEnvironmentValid)";
-        
-        .Exec {
-            Condition="$(IsEnvironmentValid)";
-            Command = @"msbuild $(MSBuildThisFileDirectory)expat\expat.vcxproj /p:PlatformToolset=${0};Platform=${1};Configuration=${2};UsesConfigurationType=${3};CallingConvention=${4};Wide=${5}";
+	("v140, v120, v110, v100", "Win32, x64", "Debug,Release") => {
+        .MsBuildEx {
+            MaxThreads = $(MaxThreads);
+            LoadEnvironmentFromTargets = VC_${0}_${1};
+            StartMessage = @"Environment vc_${0}_${1} -- ${2}  ${3} ";
+            Properties= @"PlatformToolset=${0};Platform=${1};Configuration=${2};";
+            Projects=${ProjectFiles};
         };
-        
-        .PopEnvironment{};
-	};
+    };
+    
+    // wait for all threaded tasks to finish.
+    .WaitForTasks { };
+
 	
 };
 

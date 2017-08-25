@@ -9,7 +9,6 @@ configurations {
 		
 };
 
-
 nuget {
 	// the nuspec file metadata. Gets created/updated on build
 	nuspec {
@@ -24,8 +23,8 @@ nuget {
 		requireLicenseAcceptance:false;
 		summary:The Expat XML Parser;
 		description: @"The Expat XML Parser.
-	Expat homepage:  http://libexpat.org/";
-		releaseNotes: "Release of expat 2.1.0 libraries.";
+	      Expat homepage:  http://libexpat.org/";
+		releaseNotes: "Release of expat 2.4.0 libraries.";
 		copyright: Copyright 2013;
 		tags: { expat, native, CoApp };
 
@@ -35,37 +34,38 @@ nuget {
 	// (inserted into the nuspec file)
 	files {
 		include: { 
-            ..\lib\expat.h, 
-            ..\lib\expat_external.h,
-            ..\lib\xmltok.h, 
-            ..\lib\xmlrole.h,
+            ..\expat\lib\expat.h, 
+            ..\expat\lib\expat_external.h,
+            ..\expat\lib\xmltok.h, 
+            ..\expat\lib\xmlrole.h,
         };
 
-		docs: {  ..\doc\**\* };
+		docs: {  ..\expat\doc\**\* };
     
-        ("v100,v110", "Win32,x64", "release,debug", "Dynamic", "utf8") => {
+        ("v100,v110,v120,v140", "Win32,x64", "release,debug", "Dynamic", "utf8") => {
 			[${0},${1},${2},${3},${4}] {
-				lib:     { .\expat\output\${0}\${1}\${2}\${3}\cdecl\libexpat.lib };
-				bin:     { .\expat\output\${0}\${1}\${2}\${3}\cdecl\libexpat.dll };
-				symbols: { .\expat\output\${0}\${1}\${2}\${3}\cdecl\libexpat.pdb };
+				lib:     { ..\output\${0}\${1}\bin\${2}\libexpat.lib };
+				bin:     { ..\output\${0}\${1}\bin\${2}\libexpat.dll };
+				symbols: { ..\output\${0}\${1}\bin\${2}\libexpat.pdb };
 			};
 		};
-		("v100,v110", "Win32,x64", "release,debug", "Static,ltcg", "utf8") => {
+		("v100,v110,v120,v140", "Win32,x64", "release,debug", "Static", "utf8") => {
 			[${0},${1},${2},${3},${4}] {
-				lib:     { .\expat\output\${0}\${1}\${2}\${3}\cdecl\libexpat.lib };
+				lib:     { ..\output\${0}\${1}\bin\${2}\libexpatMT.lib };
 			};
 		};
 
-        ("v100,v110", "Win32,x64", "release,debug", "Dynamic", "utf16") => {
+        ("v100,v110,v120,v140", "Win32,x64", "release,debug", "Dynamic", "utf16") => {
 			[${0},${1},${2},${3},${4}] {
-				lib:     { .\expat\output\${0}\${1}\${2}\${3}\cdecl\libexpatw.lib };
-				bin:     { .\expat\output\${0}\${1}\${2}\${3}\cdecl\libexpatw.dll };
-				symbols: { .\expat\output\${0}\${1}\${2}\${3}\cdecl\libexpatw.pdb };
+				lib:     { ..\output\${0}\${1}\bin\${2}\libexpatw.lib };
+				bin:     { ..\output\${0}\${1}\bin\${2}\libexpatw.dll };
+				symbols: { ..\output\${0}\${1}\bin\${2}\libexpatw.pdb };
+
 			};
 		};
-		("v100,v110", "Win32,x64", "release,debug", "Static,ltcg",  "utf16") => {
+		("v100,v110,v120,v140", "Win32,x64", "release,debug", "Static", "utf16") => {
 			[${0},${1},${2},${3},${4}] {
-				lib:     { .\expat\output\${0}\${1}\${2}\${3}\cdecl\libexpatw.lib };
+				lib:     { ..\output\${0}\${1}\bin\${2}\libexpatwMT.lib };
 			};
 		};
 	};
@@ -81,10 +81,11 @@ nuget {
 	targets {
 		// every configuration needs to reference the include directories.
 		Defines += HAS_EXPAT;
-		[static]
+	[static]
 			Defines += XML_STATIC;
         [utf16]
 			Defines += XML_UNICODE_WCHAR_T;
+
 	};
 }
 
